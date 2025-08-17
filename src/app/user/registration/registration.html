@@ -3,23 +3,40 @@
 </div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-<div class="mb-3">
-    <input  class="form-control bg-body-secondary" placeholder="Full Name"
-    formControlName="fullName">
-</div>
-<div class="mb-3">
-    <input  class="form-control bg-body-secondary" placeholder="email"
-    formControlName="email">
-</div>
-<div class="mb-3">
-    <input   class="form-control bg-body-secondary" placeholder="password"
-    formControlName="password">
-</div>
-<div class="mb-3">
-    <input  class="form-control bg-body-secondary" placeholder="Confirm Password"
-    formControlName="confirmPassword">
-</div>
-<div class="mt-4">
-    <button type="submit" class="btn btn-success w-100 rounded-3"> Register</button>
-</div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Full Name" formControlName="fullName">
+        <div class="error-feedback"
+            *ngIf="hasDisplayableError('fullName') && form.controls['fullName'].hasError('required')">Please enter your
+            full name</div>
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="email" formControlName="email">
+
+        <div class="error-feedback" *ngIf="hasDisplayableError('email')">
+            <div *ngIf="form.controls['email'].hasError('required')"> Please Enter your email address</div>
+
+
+            <div *ngIf="form.controls['email'].hasError('email')"> Please enter a valid email address</div>
+
+        </div>
+
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="password" formControlName="password">
+        <div class="error-feedback" *ngIf="hasDisplayableError('password')">
+            <div *ngIf="form.controls['password'].hasError('required')"> Please Enter your password</div>
+
+
+            <div *ngIf="form.controls['password'].hasError('minlength')"> Atleast 6 Characters required</div>
+            <div *ngIf="form.controls['password'].hasError('pattern')"> One or more special Characters</div>
+
+        </div>
+
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Confirm Password" formControlName="confirmPassword">
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100 rounded-3"> Register</button>
+    </div>
 </form>
